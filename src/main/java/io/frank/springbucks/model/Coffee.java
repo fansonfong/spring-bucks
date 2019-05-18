@@ -4,25 +4,26 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.Type;
 import org.joda.money.Money;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.Date;
+
 
 /**
  * Created by frank on 17/05/2019
  */
-@Entity
-@Table(name = "T_COFFEE")
+@Document
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coffee extends BaseEntity {
+public class Coffee {
+    @Id
+    private String id;
     private String name;
-    @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyMinorAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "CNY")})
     private Money price;
+    private Date createTime;
+    private Date updateTime;
 }
